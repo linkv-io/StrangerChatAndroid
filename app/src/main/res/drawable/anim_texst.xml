@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/zanim_boat120" android:duration="100"/>
+    <item android:drawable="@drawable/zanim_boat121" android:duration="100"/>
+    <item android:drawable="@drawable/zanim_boat122" android:duration="100"/>
+    <item android:drawable="@drawable/zanim_boat123" android:duration="100"/>
+    <item android:drawable="@drawable/zanim_boat124" android:duration="100"/>
+    <item android:drawable="@drawable/zanim_boat125" android:duration="100"/>
+    <item android:drawable="@drawable/zanim_boat126" android:duration="100"/>
+    <item android:drawable="@drawable/zanim_boat127" android:duration="100"/>
+    <item android:drawable="@drawable/zanim_boat128" android:duration="100"/>
+
+    
+</animation-list>

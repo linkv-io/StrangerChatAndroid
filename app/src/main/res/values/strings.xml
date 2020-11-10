@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">StrangeChat-Android</string>
+    <string name="call">呼叫</string>
+    <string name="incoming_call">申请和你通话</string>
+    <string name="id">ID: %d</string>
+    <string name="gift_num">X%d</string>
+</resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="LVRelativeLayout">
+        <attr name="lvRatio" format="float" />
+        <attr name="lvCorner" format="dimension" />
+        <attr name="lvCircle" format="boolean"/>
+    </declare-styleable>
+</resources>
