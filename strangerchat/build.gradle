@@ -7,8 +7,8 @@ android {
     defaultConfig {
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode Integer.parseInt(LIVEME_SDK_VERSION_CODE)
+        versionName LIVEME_SDK_VERSION_NAME
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
@@ -28,3 +28,9 @@ dependencies {
     api 'com.linkv.live:rtmsdk:0.0.6'
 
 }
+
+
+group GROUP_NAME
+version android.defaultConfig.versionName
+println version
+apply from: './upload_aar.gradle'
