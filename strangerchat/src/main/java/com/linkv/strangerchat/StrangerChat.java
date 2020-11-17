@@ -80,7 +80,15 @@ public class StrangerChat extends LVRTMEngine implements IMBridger.IMModuleEvent
         return LVIMSDK.sharedInstance().sendMessage(msg, null, listener);
     }
 
-    // 同意或拒绝某个用户的呼叫
+    /**
+     * 同意或拒绝某个用户的呼叫
+      * @param tid 对方Id
+     * @param accept true为接听，false为挂断。
+     * @param isAudio 是否仅语音
+     * @param extra 附加数据
+     * @param listener 结果回调
+     * @return 0为正常，非0为错误码
+     */
     public int answerCall(String tid, boolean accept, boolean isAudio, String extra, IMBridger.IMSendMessageListener listener) {
 
         if (TextUtils.isEmpty(tid)) {

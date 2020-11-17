@@ -43,7 +43,8 @@ public class EngineManager implements StrangerChat.IMEventHandler {
     }
 
     public void initEngine(Application application) {
-        mEngine = StrangerChat.createEngine(application, Constants.APP_ID, Constants.APP_SECRET, false,
+        // APP_ID和APP_SECRET请在LinkV官网获取。
+        mEngine = StrangerChat.createEngine(application, LocalConfig.APP_ID, LocalConfig.APP_SECRET, false,
                 i -> {
                     LogUtils.d(TAG, "onInitResult code = " + i);
                 }, this);
