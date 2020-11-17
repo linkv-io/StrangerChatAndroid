@@ -47,7 +47,7 @@
     </FrameLayout>
 
     <!--  🎁特效-->
-    <com.linkv.strangechat.widget.FrameImageView
+    <com.linkv.strangechatdemo.widget.FrameImageView
         android:id="@+id/anim_gift"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -68,7 +68,7 @@
             android:background="@drawable/bg_room_user_info"
             android:gravity="center_vertical">
 
-            <com.linkv.strangechat.widget.CircleImageView
+            <com.linkv.strangechatdemo.widget.CircleImageView
                 android:id="@+id/iv_other_avatar"
                 android:layout_width="@dimen/live_head_icon_size"
                 android:layout_height="@dimen/live_head_icon_size"

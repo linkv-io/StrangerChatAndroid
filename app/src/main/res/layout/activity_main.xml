@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <com.linkv.strangechat.widget.CircleImageView
+    <com.linkv.strangechatdemo.widget.CircleImageView
         android:id="@+id/tv_avatar"
         android:layout_width="150dp"
         android:layout_height="150dp"

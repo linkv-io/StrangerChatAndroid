@@ -1,11 +1,19 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file('./imdemo.keystore')
+            storePassword '19881002'
+            keyPassword '19881002'
+            keyAlias = 'imdemo.keystore'
+        }
+    }
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.linkv.strangechat"
+        applicationId "com.linkv.strangechatdemo"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
@@ -20,8 +28,9 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
         }
     }
 
@@ -37,8 +46,14 @@ android {
 
 }
 
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar','*.aar'])
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
@@ -46,5 +61,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'com.github.pinguo-zhouwei:EasyBlur:v1.0.0'
-    api 'com.linkv.live:strangerchat:1.0.0'
+//    implementation project(path: ':strangerchat')
+//    api 'com.linkv.live:strangerchat:1.0.0'
+
 }

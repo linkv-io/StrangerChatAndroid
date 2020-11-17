@@ -21,11 +21,19 @@ android {
         }
     }
 
+    sourceSets {
+        main {
+            res.srcDirs = ['src/main/res']
+            jniLibs.srcDirs = ['libs']
+            jni.srcDirs = [] // This prevents the auto generation of Android.mk
+        }
+    }
+
 }
 
+
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    api 'com.linkv.live:rtmsdk:0.0.6'
+    api fileTree(dir: 'libs', include: ['*.aar', '*.jar'])
 
 }
 

@@ -88,8 +88,8 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 29 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Gradle: com.linkv.live:rtmsdk:0.0.6@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.app.live:libimcore:1.0.8.2@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.linkv.live:rtcsdk:0.0.14@aar" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:./strangerchat/libs/libimcore-1.0.8.2.aar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:./strangerchat/libs/rtcsdk-0.0.14.aar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:./strangerchat/libs/rtmsdk-release.aar:unspecified@jar" level="project" />
   </component>
 </module>

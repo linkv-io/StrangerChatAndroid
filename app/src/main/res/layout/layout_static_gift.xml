@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.linkv.strangechat.widget.StaticGiftLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.linkv.strangechatdemo.widget.StaticGiftLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_content"
     android:layout_width="match_parent"
@@ -18,7 +18,7 @@
         android:padding="3dp"
         android:paddingEnd="65dp">
 
-        <com.linkv.strangechat.widget.CircleImageView
+        <com.linkv.strangechatdemo.widget.CircleImageView
             android:id="@+id/iv_gift_sender_avatar"
             android:layout_width="35dp"
             android:layout_height="35dp"
@@ -76,6 +76,6 @@
         android:textSize="28sp"
         android:textStyle="bold" />
 
-</com.linkv.strangechat.widget.StaticGiftLayout>
+</com.linkv.strangechatdemo.widget.StaticGiftLayout>
 
 
