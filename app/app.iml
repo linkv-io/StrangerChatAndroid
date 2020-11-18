@@ -73,9 +73,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/test/shaders" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/build" />
     </content>
-    <content url="file:///src/main/res/gift">
-      <sourceFolder url="file:///src/main/res/gift" type="java-resource" />
-    </content>
     <orderEntry type="jdk" jdkName="Android API 29 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="TEST" name="Gradle: junit:junit:4.12@jar" level="project" />
@@ -86,10 +83,6 @@
     <orderEntry type="library" name="Gradle: androidx.arch.core:core-common:2.1.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.annotation:annotation:1.1.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.constraintlayout:constraintlayout-solver:2.0.2@jar" level="project" />
-    <orderEntry type="library" name="Gradle: __local_aars__:./app/libs/strangerchat-1.0.0.aar:unspecified@jar" level="project" />
-    <orderEntry type="library" name="Gradle: __local_aars__:./app/libs/libimcore-1.0.8.2.aar:unspecified@jar" level="project" />
-    <orderEntry type="library" name="Gradle: __local_aars__:./app/libs/rtcsdk-0.0.14.aar:unspecified@jar" level="project" />
-    <orderEntry type="library" name="Gradle: __local_aars__:./app/libs/rtmsdk-release.aar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.constraintlayout:constraintlayout:2.0.2@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.github.pinguo-zhouwei:EasyBlur:v1.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.appcompat:appcompat:1.2.0@aar" level="project" />
@@ -112,5 +105,9 @@
     <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-livedata-core:2.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.arch.core:core-runtime:2.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.interpolator:interpolator:1.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.linkv.live:rtmsdk:0.0.6@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.app.live:libimcore:1.0.8.2@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.linkv.live:rtcsdk:0.0.14@aar" level="project" />
+    <orderEntry type="module" module-name="strangerchat" />
   </component>
 </module>
