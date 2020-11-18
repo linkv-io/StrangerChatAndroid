@@ -46,14 +46,14 @@ android {
 
 }
 
-repositories {
-    flatDir {
-        dirs 'libs'
-    }
-}
+//repositories {
+//    flatDir {
+//        dirs 'libs'
+//    }
+//}
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar','*.aar'])
+//    implementation fileTree(dir: 'libs', include: ['*.jar','*.aar'])
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
@@ -61,5 +61,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'com.github.pinguo-zhouwei:EasyBlur:v1.0.0'
+    api 'com.linkv.live:strangerchat:1.0.0'
 
 }
