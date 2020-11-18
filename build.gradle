@@ -19,6 +19,13 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven {
+            url 'http://maven.linkv.fun/repository/liveme-android/'
+            credentials {
+                username = 'LivemesdkPublicUser'
+                password = 'public'
+            }
+        }
         maven {url "https://jitpack.io"}
     }
 }
