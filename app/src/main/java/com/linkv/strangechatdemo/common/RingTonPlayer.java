@@ -1,4 +1,4 @@
-package com.linkv.strangechatdemo;
+package com.linkv.strangechatdemo.common;
 
 import android.content.Context;
 import android.media.MediaPlayer;
@@ -21,11 +21,19 @@ public class RingTonPlayer {
     private Context context;
     private File ringTonFile;
 
+    /**
+     * 铃声播放构造方法
+     * @param context 上下文
+     * @param ringTonFile 要播放的铃声文件。
+     */
     public RingTonPlayer(Context context, File ringTonFile) {
         this.context = context;
         this.ringTonFile = ringTonFile;
     }
 
+    /**
+     * 播放铃声
+     */
     public void playRingtone() {
         if (mPlayer == null) {
             mPlayer = getRingTone();
@@ -35,6 +43,9 @@ public class RingTonPlayer {
         }
     }
 
+    /**
+     * 停止播放铃声
+     */
     public void stopRingtone() {
         if (mPlayer != null && mPlayer.isPlaying()) {
             mPlayer.stop();
@@ -44,6 +55,10 @@ public class RingTonPlayer {
         }
     }
 
+    /**
+     * 准备铃声的播放器
+     * @return 返回铃声播放器
+     */
     private MediaPlayer getRingTone() {
         MediaPlayer player = null;
         if (ringTonFile.exists()) {

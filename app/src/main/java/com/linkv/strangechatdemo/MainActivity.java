@@ -11,19 +11,25 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.im.imcore.IMBridger;
 import com.im.imlogic.IMMsg;
 import com.im.imlogic.LVIMSDK;
+import com.linkv.strangechatdemo.common.BaseActivity;
+import com.linkv.strangechatdemo.common.GlobalParams;
+import com.linkv.strangechatdemo.common.RingTonPlayer;
+import com.linkv.strangechatdemo.incomingcall.EngineManager;
+import com.linkv.strangechatdemo.incomingcall.IncomingCallActivity;
+import com.linkv.strangechatdemo.liveroom.LiveRoomActivity;
+import com.linkv.strangechatdemo.user.User;
 import com.linkv.strangechatdemo.utils.LogUtils;
 import com.linkv.strangechatdemo.utils.ToastUtil;
 import com.linkv.strangechatdemo.widget.CircleImageView;
 
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, EngineManager.StrangerChatListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener, EngineManager.StrangerChatListener {
     final static String TAG = "MainActivity";
 
     private View mBtnCall;
@@ -31,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView mTvName;
     private CircleImageView mImgAvatar;
     private TextView mTvUid;
-    CurrentUser mCurUserInstance = CurrentUser.instance();
     RingTonPlayer mRingTonCallPlayer;
 
     private String[] permissionNeeded = {
@@ -42,8 +47,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        EngineManager.getInstance().setStrangerChatListener(this);
-        mRingTonCallPlayer = new RingTonPlayer(this,GlobalParams.RINGTON_VOIP_CALL);
+        mEngineManager.setStrangerChatListener(this);
+        mRingTonCallPlayer = new RingTonPlayer(this, GlobalParams.RINGTON_VOIP_CALL);
         super.onCreate(savedInstanceState);
         requestPermission();
         setContentView(R.layout.activity_main);
@@ -63,19 +68,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mIsStarted = true;
     }
 
+    /**
+     * 登录IM
+     */
     private void doLogin() {
         if (!LVIMSDK.sharedInstance().isAppUserLoginSucceed()) {
             int login = LVIMSDK.sharedInstance().login(getUid());
             if (login == 0) {
-                onLoginSucceed();
+                // 0 代表登录成功，刷新用户信息。
+                updateUserInfo();
             }
         }
     }
 
-    private void onLoginSucceed() {
-        updateUserInfo();
-    }
 
+    /**
+     * 刷新用户信息的界面展示。
+     */
     private void updateUserInfo() {
         if (mCurUserInstance.getUser().getUid() != 0) {
             mTvName.setText(mCurUserInstance.getUser().getName());
@@ -88,11 +97,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mTvName.setText("");
             mTvUid.setText("");
         }
-
     }
 
 
-    // 生成一个4位数userId
+    /**
+     * 生成一个4位数的随机userId
+     * @return
+     */
     private String getUid() {
         if (mCurUserInstance.getUser().getUid() == 0) {
             int uid = (int) (10000 * Math.random()) + 1;
@@ -139,15 +150,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // 点击呼叫，检查tid。
                 String tid = mEtTid.getText().toString();
                 if (!TextUtils.isEmpty(tid)) {
-                    // 呼叫
                     callUser(tid);
                 }
                 break;
         }
     }
 
+    /**
+     * 主动呼叫
+     * @param tid 要呼叫的用户ID
+     */
     private void callUser(String tid) {
-        EngineManager.getInstance().getEngine().call(tid, false, "", new IMBridger.IMSendMessageListener() {
+        mStrangerChatEngine.call(tid, false, "", new IMBridger.IMSendMessageListener() {
             @Override
             public void onIMSendMessageCallback(int i, String s, IMMsg imMsg, Object o) {
                 LogUtils.d(TAG, "callUser code  = " + i);
@@ -159,6 +173,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public int onCallReceived(String uid, boolean isAudio, long timestamp, String extra) {
+        // 收到被叫时判断是否在住页面，是就开启被叫页面
         mRingTonCallPlayer.stopRingtone();
         if (mIsStarted) {
             IncomingCallActivity.actionStart(this, uid);
@@ -171,6 +186,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onStop() {
         mIsStarted = false;
         super.onStop();
+        // 退出界面停止播放呼叫铃声。
         mRingTonCallPlayer.stopRingtone();
     }
 
@@ -200,6 +216,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    /**
+     * 申请摄像头和麦克风权限。
+     */
     private void requestPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this, "android.permission.CAMERA") != PackageManager.PERMISSION_GRANTED ||

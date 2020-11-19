@@ -30,8 +30,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".IncomingCallActivity" />
-        <activity android:name=".LiveRoomActivity" android:screenOrientation="portrait"
+        <activity android:name=".incomingcall.IncomingCallActivity" />
+        <activity android:name=".liveroom.LiveRoomActivity" android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
     </application>
 

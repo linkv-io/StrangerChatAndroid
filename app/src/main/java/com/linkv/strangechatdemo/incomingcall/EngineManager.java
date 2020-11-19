@@ -1,9 +1,11 @@
-package com.linkv.strangechatdemo;
+package com.linkv.strangechatdemo.incomingcall;
 
 import android.app.Application;
 
 import com.im.imlogic.IMMsg;
 import com.im.imlogic.LVIMSDK;
+import com.linkv.strangechatdemo.LocalConfig;
+import com.linkv.strangechatdemo.user.CurrentUser;
 import com.linkv.strangechatdemo.utils.LogUtils;
 import com.linkv.strangechatdemo.utils.ToastUtil;
 import com.linkv.strangerchat.StrangerChat;
@@ -11,7 +13,7 @@ import com.linkv.strangerchat.StrangerChat;
 
 /**
  * Created by Xiaohong on 2020/11/5.
- * desc:
+ * desc: 视频聊天引擎管理单例
  */
 public class EngineManager implements StrangerChat.IMEventHandler {
     private final static String TAG = "StrangerChatEngine";
@@ -38,6 +40,10 @@ public class EngineManager implements StrangerChat.IMEventHandler {
     private EngineManager() {
     }
 
+    /**
+     * 获取视频引擎
+     * @return 请先调用initEngine方法初始化，否则返回null
+     */
     public StrangerChat getEngine() {
         return mEngine;
     }
@@ -64,6 +70,15 @@ public class EngineManager implements StrangerChat.IMEventHandler {
         return 0;
     }
 
+    /**
+     * 呼叫对方的回应
+     * @param uid 对方用户ID
+     * @param accept 是否接听，true为接听，false为挂断
+     * @param isAudio 是否仅音频
+     * @param timestamp 回应时的时间戳
+     * @param extra 负载数据
+     * @return
+     */
     @Override
     public int onAnswerCallReceived(String uid, boolean accept, boolean isAudio, long timestamp, String extra) {
         if (mStrangerChatListener != null) {
@@ -72,6 +87,12 @@ public class EngineManager implements StrangerChat.IMEventHandler {
         return 0;
     }
 
+    /**
+     * 收到某个用户挂断通话的回调
+     * @param uid 对方用户ID
+     * @param extra 负载数据
+     * @return
+     */
     @Override
     public int onHangupCallReceived(String uid, String extra) {
         if (mStrangerChatListener != null) {
@@ -83,7 +104,7 @@ public class EngineManager implements StrangerChat.IMEventHandler {
 
     @Override
     public void onQueryIMToken() {
-        //
+        // 实际中token是需要你们的服务端去向我们的服务端获取。
         String token = "i_am_token";
         LVIMSDK.sharedInstance().setIMToken(CurrentUser.instance().getUser().getUid()+"", token);
     }

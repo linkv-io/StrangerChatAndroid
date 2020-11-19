@@ -2,9 +2,12 @@ package com.linkv.strangechatdemo;
 
 import android.app.Application;
 
+import com.linkv.strangechatdemo.common.GlobalParams;
+import com.linkv.strangechatdemo.incomingcall.EngineManager;
+
 /**
  * Created by Xiaohong on 2020/11/6.
- * desc:
+ * desc:自定义Application类
  */
 public class LinkVApplication extends Application {
 
@@ -19,6 +22,10 @@ public class LinkVApplication extends Application {
         mAppContext = this;
     }
 
+    /**
+     * 获取application 上下文。
+     * @return
+     */
     public static Application getApplication() {
         return mAppContext;
     }

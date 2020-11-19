@@ -1,14 +1,21 @@
-package com.linkv.strangechatdemo;
+package com.linkv.strangechatdemo.liveroom;
+
+import com.linkv.strangechatdemo.R;
 
 /**
  * Created by Xiaohong on 2020/11/9.
  * desc:
  */
 public class Gift {
+    // 礼物显示名称
     private String name;
+    // 礼物ID
     private int id;
+    // 礼物类型，true为静态图片礼物，false为动态礼物。
     private boolean isStatic;
+    // 礼物预览图片资源ID
     private int previewId;
+    // 动态礼物资源ID
     private int animId;
     private int price;
 
@@ -37,6 +44,11 @@ public class Gift {
     }
 
 
+    /**
+     * 根据礼物ID初始化礼物信息
+     * @param id 礼物ID。
+     * @return
+     */
     public static Gift createGiftById(int id) {
         Gift gift = new Gift(id);
         switch (id) {

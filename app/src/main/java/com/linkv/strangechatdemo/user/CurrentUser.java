@@ -1,13 +1,12 @@
-package com.linkv.strangechatdemo;
+package com.linkv.strangechatdemo.user;
 
 /**
  * Created by Xiaohong on 2020/11/6.
- * desc:
+ * desc: 当前登录用户单例类
  */
 public class CurrentUser {
     private static CurrentUser mInstance;
     private User user =  new User();
-
 
     private CurrentUser() {
     }

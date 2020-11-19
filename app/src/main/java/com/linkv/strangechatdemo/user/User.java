@@ -1,12 +1,16 @@
-package com.linkv.strangechatdemo;
+package com.linkv.strangechatdemo.user;
+
+import com.linkv.strangechatdemo.R;
 
 /**
  * Created by Xiaohong on 2020/11/6.
- * desc:
+ * desc: 用户信息
  */
 public class User {
     private int uid;
+    // 用户名
     private String name;
+    // 用户头像资源ID
     private int avatarId;
 
     private static String[] nameArray = {"Mike", "Snow Wing", "Snow", "Json", "Steven", "江城子", "故人初", "泪倾城", "清风叹", "月下客"};

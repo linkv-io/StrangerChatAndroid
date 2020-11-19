@@ -7,7 +7,7 @@ import java.io.InputStream;
 
 /**
  * Created by Xiaohong on 2020/11/8.
- * desc:
+ * desc:文件工具类
  */
 public class FileUtils {
 

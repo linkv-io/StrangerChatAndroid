@@ -2,7 +2,7 @@ package com.linkv.strangechatdemo.utils;
 
 /**
  * Created by Xiaohong on 2020/11/17.
- * desc:
+ * desc: 时间格式工具类
  */
 public class TimeUtils {
 
