@@ -38,7 +38,7 @@ StrangerChat在GitHub上提供开源的实时视频通话示例项目[StrangerCh
   ```
 
 
-![img](https://dl.linkv.io/doc/zh/android/chat/images/image-maven-config.png)
+![img](https://raw.githubusercontent.com/linkvxiaohong/StrangerChatAndroid/outer/images/image-maven-config.png)
 
 * 在app的build.gradle文件添加社交SDK依赖：
 
@@ -71,7 +71,7 @@ StrangerChat在GitHub上提供开源的实时视频通话示例项目[StrangerCh
 </network-security-config>
 ```
 
-![img](https://dl.linkv.io/doc/zh/android/chat/images/image-http-xml.png)
+![img](https://raw.githubusercontent.com/linkvxiaohong/StrangerChatAndroid/outer/images/image-http-xml.png)
 
 
 
