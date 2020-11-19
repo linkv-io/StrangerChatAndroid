@@ -9,7 +9,7 @@ import com.linkv.strangechatdemo.LinkVApplication;
 
 /**
  * Created by Xiaohong on 2020/11/6.
- * desc:
+ * desc: Toast展示工具类
  */
 public class ToastUtil {
     private static Handler mHandler = new Handler(Looper.getMainLooper());

@@ -1,4 +1,4 @@
-package com.linkv.strangechatdemo;
+package com.linkv.strangechatdemo.liveroom;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,10 +14,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.im.imlogic.IMMsg;
 import com.linkv.rtcsdk.bean.VideoQuality;
+import com.linkv.strangechatdemo.common.BaseActivity;
+import com.linkv.strangechatdemo.R;
+import com.linkv.strangechatdemo.user.User;
 import com.linkv.strangechatdemo.utils.LogUtils;
 import com.linkv.strangechatdemo.utils.TimeUtils;
 import com.linkv.strangechatdemo.utils.ToastUtil;
@@ -33,7 +35,7 @@ import java.util.List;
  * Created by Xiaohong on 2020/11/5.
  * desc:
  */
-public class LiveRoomActivity extends AppCompatActivity implements StrangerChat.StrangerRoomHandler, View.OnClickListener {
+public class LiveRoomActivity extends BaseActivity implements StrangerChat.StrangerRoomHandler, View.OnClickListener {
     private static final String TAG = "LiveRoomActivity";
     private static String KEY_TID = "KEY_TID";
     private static String KEY_ROOM_ID = "KEY_ROOM_ID";
@@ -51,14 +53,11 @@ public class LiveRoomActivity extends AppCompatActivity implements StrangerChat.
     private View mViewGroupBottom;
     private ViewGroup mContainerVideoLarge;
     private ViewGroup mContainerVideoSmall;
-    private EngineManager engineManager;
-    private StrangerChat mStrangerChatEngine;
     private boolean mIsMicOpen = true;
     private boolean mIsCameraOpen = true;
     private boolean mIsFront = true;
 
     private Handler mHandler = new Handler(Looper.getMainLooper());
-    CurrentUser mCurUserInstance = CurrentUser.instance();
     private FrameImageView mAnimGift;
     private View mLayoutGift;
     private boolean mIsBtnsShow = true;
@@ -74,8 +73,7 @@ public class LiveRoomActivity extends AppCompatActivity implements StrangerChat.
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        engineManager = EngineManager.getInstance();
-        mStrangerChatEngine = engineManager.getEngine();
+
         setContentView(R.layout.activity_live_room);
         initView();
         initData();
@@ -96,7 +94,6 @@ public class LiveRoomActivity extends AppCompatActivity implements StrangerChat.
     }
 
     private void initView() {
-        //
         mTvTime = findViewById(R.id.tv_time_count);
         mBtnClose = findViewById(R.id.btn_close);
         mBtnGift = findViewById(R.id.btn_gift);
@@ -126,7 +123,9 @@ public class LiveRoomActivity extends AppCompatActivity implements StrangerChat.
         initGiftView();
     }
 
-    // 初始化礼物面板
+    /**
+     * 初始化礼物面板
+     */
     private void initGiftView() {
         View plane = findViewById(R.id.item_gift_air_plane);
         plane.setOnClickListener(this);
@@ -154,15 +153,26 @@ public class LiveRoomActivity extends AppCompatActivity implements StrangerChat.
         initGiftItem(candy, R.drawable.tang3x, 100);
     }
 
-    // 初始化礼物项
-    private void initGiftItem(View plane, int previewId, int price) {
-        ImageView ivPreview = plane.findViewById(R.id.iv_preview);
-        TextView tvPrice = plane.findViewById(R.id.tv_price);
+    /**
+     * 初始化礼物项
+     * @param giftView 礼物信息显示控件
+     * @param previewId  礼物预览图
+     * @param price 礼物价格
+     */
+    private void initGiftItem(View giftView, int previewId, int price) {
+        ImageView ivPreview = giftView.findViewById(R.id.iv_preview);
+        TextView tvPrice = giftView.findViewById(R.id.tv_price);
         ivPreview.setImageResource(previewId);
         tvPrice.setText(String.valueOf(price));
     }
 
 
+    /**
+     * 开启本Activity
+     * @param context 上下文
+     * @param tid 对方用户ID
+     * @param roomId 聊天室ID
+     */
     public static void actionStart(Context context, String tid, String roomId) {
         Intent intent = new Intent(context, LiveRoomActivity.class);
         intent.putExtra(KEY_TID, tid);
@@ -173,7 +183,6 @@ public class LiveRoomActivity extends AppCompatActivity implements StrangerChat.
 
     @Override
     public void onCallTimeChanged(int duration, String roomId) {
-        mTvTime.setText(duration + " S");
     }
 
     @Override
@@ -184,7 +193,6 @@ public class LiveRoomActivity extends AppCompatActivity implements StrangerChat.
                 Gift gift = Gift.createGiftById(Integer.parseInt(giftId));
                 if (gift.isStatic()) {
                     // 静态礼物
-
                     mContainerGift.showStaticGift(Integer.parseInt(sendUid), gift);
                 } else {
                     // 播放动画礼物
@@ -192,7 +200,6 @@ public class LiveRoomActivity extends AppCompatActivity implements StrangerChat.
                 }
             }
         });
-
         return 0;
     }
 
@@ -250,6 +257,11 @@ public class LiveRoomActivity extends AppCompatActivity implements StrangerChat.
         return 0;
     }
 
+    /**
+     * 显示高斯模糊的头像
+     * @param uid 对应头像的用户ID
+     * @param blurView 待显示高斯模糊头像控件。
+     */
     private void showBlurView(int uid, ImageView blurView) {
         User user = new User(uid);
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), user.getAvatarId());
@@ -259,7 +271,12 @@ public class LiveRoomActivity extends AppCompatActivity implements StrangerChat.
     }
 
 
-    public Bitmap boxBlur(Bitmap srcBitmap) {
+    /**
+     * 将bitmap进行
+     * @param srcBitmap
+     * @return
+     */
+    private Bitmap boxBlur(Bitmap srcBitmap) {
         return EasyBlur.with(this)
                 .bitmap(srcBitmap) //要模糊的图片
                 .radius(10)//模糊半径
@@ -356,11 +373,13 @@ public class LiveRoomActivity extends AppCompatActivity implements StrangerChat.
                 mIvMic.setImageResource(mIsMicOpen ? R.drawable.audio_on2x : R.drawable.audio_off2x);
                 break;
             case R.id.btn_enable_camera:
+                // 开启或关闭摄像头
                 mIsCameraOpen = !mIsCameraOpen;
                 if (mIsCameraOpen) {
                     mStrangerChatEngine.startCapture(mCurUserInstance.getUser().getUid() + "", mContainerVideoSmall, true);
                     mIvBlurSmall.setVisibility(View.GONE);
                 } else {
+                    // 关闭摄像头是显示自己的高斯模糊头像
                     showBlurView(mCurUserInstance.getUser().getUid(), mIvBlurSmall);
                     mStrangerChatEngine.stopCapture();
                 }
@@ -442,6 +461,7 @@ public class LiveRoomActivity extends AppCompatActivity implements StrangerChat.
 
     @Override
     public void onBackPressed() {
+        // 按返回键，如果礼物面板打开则关闭礼物面板。否则退出Activity。
         if (mLayoutGift.isShown()) {
             mLayoutGift.setVisibility(View.GONE);
         } else {

@@ -13,9 +13,9 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.linkv.strangechatdemo.Gift;
+import com.linkv.strangechatdemo.liveroom.Gift;
 import com.linkv.strangechatdemo.R;
-import com.linkv.strangechatdemo.User;
+import com.linkv.strangechatdemo.user.User;
 
 /**
  * Created by Xiaohong on 2020/11/9.

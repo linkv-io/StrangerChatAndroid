@@ -1,7 +1,8 @@
-package com.linkv.strangechatdemo;
+package com.linkv.strangechatdemo.common;
 
 import android.content.Context;
 
+import com.linkv.strangechatdemo.R;
 import com.linkv.strangechatdemo.utils.FileUtils;
 
 import java.io.File;
