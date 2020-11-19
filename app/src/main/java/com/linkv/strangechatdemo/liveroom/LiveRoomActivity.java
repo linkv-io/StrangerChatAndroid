@@ -390,9 +390,6 @@ public class LiveRoomActivity extends BaseActivity implements StrangerChat.Stran
                 mStrangerChatEngine.useFrontCamera(mIsFront);
                 mBtnSwitchCamera.setSelected(mIsFront);
                 break;
-            case R.id.container_video_small:
-                // 切换大小屏画面
-                break;
             case R.id.container_video_large:
                 setBtnsVisible();
                 break;
@@ -431,7 +428,9 @@ public class LiveRoomActivity extends BaseActivity implements StrangerChat.Stran
         }
     }
 
-    // // 隐藏或展示按钮
+    /**
+     * 隐藏或展示操作按钮
+     */
     private void setBtnsVisible() {
         mIsBtnsShow = !mIsBtnsShow;
         mViewGroupTop.setVisibility(mIsBtnsShow ? View.VISIBLE : View.GONE);
