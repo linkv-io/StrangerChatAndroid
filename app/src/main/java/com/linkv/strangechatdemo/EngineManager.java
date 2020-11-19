@@ -42,8 +42,12 @@ public class EngineManager implements StrangerChat.IMEventHandler {
         return mEngine;
     }
 
+    /**
+     * 初始化SDK
+     * @param application 应用Application
+     */
     public void initEngine(Application application) {
-        // APP_ID和APP_SECRET请在LinkV官网获取。
+        // APP_ID和APP_SECRET请在LinkV官网获取。 商务合作与技术交流请加QQ群：1160896626
         mEngine = StrangerChat.createEngine(application, LocalConfig.APP_ID, LocalConfig.APP_SECRET, false,
                 i -> {
                     LogUtils.d(TAG, "onInitResult code = " + i);
@@ -53,6 +57,7 @@ public class EngineManager implements StrangerChat.IMEventHandler {
 
     @Override
     public int onCallReceived(String uid, boolean isAudio, long timestamp, String extra) {
+        // 收到呼叫
         if (mStrangerChatListener != null) {
             mStrangerChatListener.onCallReceived(uid, isAudio, timestamp, extra);
         }
@@ -78,7 +83,9 @@ public class EngineManager implements StrangerChat.IMEventHandler {
 
     @Override
     public void onQueryIMToken() {
-        LVIMSDK.sharedInstance().setIMToken(CurrentUser.instance().getUser().getUid()+"", "i_am_token");
+        //
+        String token = "i_am_token";
+        LVIMSDK.sharedInstance().setIMToken(CurrentUser.instance().getUser().getUid()+"", token);
     }
 
     @Override

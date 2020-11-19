@@ -1,13 +1,12 @@
 # 一对一视频通话
 
-本文介绍如何使用StrangerChat视频通话SDK快速实现视频通话
+本文介绍如何使用StrangerChat视频通话SDK快速实现视频通话。 商务合作与技术交流请加QQ群：1160896626
 
 ## 1、示例项目
 
 StrangerChat在GitHub上提供开源的实时视频通话示例项目[StrangerChatAndroid](https://github.com/linkvxiaohong/StrangerChatAndroid)。在实现相关功能前，你可以下载并查看源码。
 
 ![](https://github.com/linkv-io/StrangerChat/blob/master/Snapshot/StrangerChat.gif?raw=true)
-
 
 
 
