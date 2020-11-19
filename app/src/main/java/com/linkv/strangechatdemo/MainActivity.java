@@ -43,13 +43,17 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             "android.permission.CAMERA",
             "android.permission.RECORD_AUDIO"};
     private boolean mIsStarted = false;
+    // 上次点击呼叫的时间
+    private long mLastClickTime;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        mEngineManager.setStrangerChatListener(this);
-        mRingTonCallPlayer = new RingTonPlayer(this, GlobalParams.RINGTON_VOIP_CALL);
         super.onCreate(savedInstanceState);
+        mRingTonCallPlayer = new RingTonPlayer(this, GlobalParams.RINGTON_VOIP_CALL);
+        if (mEngineManager != null) {
+            mEngineManager.setStrangerChatListener(this);
+        }
         requestPermission();
         setContentView(R.layout.activity_main);
         initView();
@@ -102,6 +106,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     /**
      * 生成一个4位数的随机userId
+     *
      * @return
      */
     private String getUid() {
@@ -142,14 +147,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         });
     }
 
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_call:
                 // 点击呼叫，检查tid。
                 String tid = mEtTid.getText().toString();
-                if (!TextUtils.isEmpty(tid)) {
+                long currentTimeMillis = System.currentTimeMillis();
+                // 防止频繁点击呼叫
+                if (currentTimeMillis - mLastClickTime > 1000 && !TextUtils.isEmpty(tid)) {
+                    mLastClickTime = currentTimeMillis;
                     callUser(tid);
                 }
                 break;
@@ -158,6 +165,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     /**
      * 主动呼叫
+     *
      * @param tid 要呼叫的用户ID
      */
     private void callUser(String tid) {
@@ -227,8 +235,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             }
         }
     }
-
-
 
 
 }
