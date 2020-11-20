@@ -1,6 +1,7 @@
 # 一对一视频通话
 
-本文介绍如何使用StrangerChat视频通话SDK快速实现视频通话。 商务合作与技术交流请加QQ群：1160896626
+本文介绍如何使用StrangerChat视频通话SDK快速实现视频通话。 
+* 商务合作与技术交流请加QQ群：**1160896626**
 
 ## 1、示例项目
 
@@ -28,18 +29,21 @@ StrangerChat在GitHub上提供开源的实时视频通话示例项目[StrangerCh
 
   ```xml
   maven {
-  		url 'http://maven.linkv.fun/repository/liveme-android/'
-  		credentials {
-  				username = 'LivemesdkPublicUser'
-  				password = 'public'
-  		}
+    url 'http://maven.linkv.fun/repository/liveme-android/'
+    credentials {
+            username = 'LivemesdkPublicUser'
+            password = 'public'
+    }
   }
   ```
 
 
 ![img](https://raw.githubusercontent.com/linkvxiaohong/StrangerChatAndroid/outer/images/image-maven-config.png)
 
-* 在app的build.gradle文件添加社交SDK依赖：
+* 在项目中的android/app/build.gradle文件添加社交SDK依赖，请尽量使用api方式引入依赖，方便使用进阶功能接口：
+```xml
+    api 'com.linkv.live:strangerchat:1.0.1'
+```
 
   
 
@@ -47,7 +51,7 @@ StrangerChat在GitHub上提供开源的实时视频通话示例项目[StrangerCh
 
 ### 添加权限
 
-复制以下代码，粘贴到安卓清单文件里面。
+打开项目中的android/app/src/main/AndroidManifest.xml文件，添加如下代码。
 
 ```java
 // 需要使用麦克风权限，否则无法发布音频直播，无法与主持人音频连麦.
@@ -59,9 +63,9 @@ StrangerChat在GitHub上提供开源的实时视频通话示例项目[StrangerCh
 
 ### 允许使用http协议
 
-> 由于目前 SDK 还需要使用 http 域名，所以请加入以下配置。
+> 由于Android 9.0以上版本默认禁止使用http域名，但sdk还需要使用到http域名，故需要做一些配置以支持Android 9.0以上的版本使用http域名
 
-在res目录下创建xml目录，xml目录下创建network_security_config.xml文件。复制以下代码，粘贴到 network_security_config.xml 里面。
+在项目路径android/app/src/main/res/xml文件夹中创建文件network_security_config.xml，并添加如下代码：
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -73,5 +77,7 @@ StrangerChat在GitHub上提供开源的实时视频通话示例项目[StrangerCh
 ![img](https://raw.githubusercontent.com/linkvxiaohong/StrangerChatAndroid/outer/images/image-http-xml.png)
 
 
-
-然后在安卓清单文件的Application节点中添加android:networkSecurityConfig="@xml/network_security_config"。
+打开项目中的android/app/src/main/AndroidManifest.xml文件，在application标签中添加如下属性：
+```xml
+    android:networkSecurityConfig="@xml/network_security_config"
+```
