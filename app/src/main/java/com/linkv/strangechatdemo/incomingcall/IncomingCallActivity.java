@@ -84,8 +84,9 @@ public class IncomingCallActivity extends BaseActivity implements View.OnClickLi
                     mStrangerChatEngine.answerCall(mTUid, true, false, "", null);
                 }
                 finish();
-                // 房间ID为呼叫方ID
-                LiveRoomActivity.actionStart(this, mTUid, mTUid);
+                // 房间ID为被叫方ID
+                String roomId = mCurUserInstance.getUser().getUid() + "";
+                LiveRoomActivity.actionStart(this, mTUid, roomId);
                 break;
             case R.id.btn_hangup:
                 // 挂断

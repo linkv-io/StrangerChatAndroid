@@ -202,8 +202,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     public int onAnswerCallReceived(String uid, boolean accept, boolean isAudio, long timestamp, String extra) {
         // 对方接听进入聊天室，否则提示对方拒接
         if (accept) {
-            // 房间ID为呼叫方ID
-            LiveRoomActivity.actionStart(this, uid, mCurUserInstance.getUser().getUid() + "");
+            // 房间ID为被叫方ID
+            LiveRoomActivity.actionStart(this, uid, uid);
         } else {
             ToastUtil.shawToast("对方已挂断");
             mRingTonCallPlayer.stopRingtone();
