@@ -1,2 +1,3 @@
 rootProject.name='StrangeChat-Android'
 include ':app'
+include ':strangerchat'

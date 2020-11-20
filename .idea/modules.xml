@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/StrangeChat-Android.iml" filepath="$PROJECT_DIR$/StrangeChat-Android.iml" group="StrangeChat-Android" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="StrangeChat-Android/app" />
       <module fileurl="file://$PROJECT_DIR$/.idea/strangechatandroid.iml" filepath="$PROJECT_DIR$/.idea/strangechatandroid.iml" />
+      <module fileurl="file://$PROJECT_DIR$/strangerchat/strangerchat.iml" filepath="$PROJECT_DIR$/strangerchat/strangerchat.iml" group="StrangeChat-Android/strangerchat" />
     </modules>
   </component>
 </project>
