@@ -1,10 +1,10 @@
 # 一对一视频通话
-StrangerChat视频通话SDK是一套基于RTC（实时音视频）的SDK，您可以用它来实现陌人生交友、视频聊天、网络聊天室等社交应用，还可以实现连麦，主播PK等功能。本文介绍如何使用StrangerChat视频通话SDK快速实现音视频通话。 
+StrangerChat SDK不仅包含有类似声网和Zego的RTC音视频推拉流及IM通讯能力，除此之外还封装了陌生人交友、视频聊天、网络聊天室等场景需要用到的一些api。例如呼叫、接听、连麦、送礼、礼物动效等常用功能。本文介绍如何使用StrangerChat SDK快速实现音视频通话。 
 * 商务合作与技术交流请加QQ群：**1160896626**
 
 ## 1、示例项目
 
-StrangerChat在GitHub上提供开源的实时视频通话示例项目[StrangerChatAndroid](https://github.com/linkvxiaohong/StrangerChatAndroid)。在实现相关功能前，你可以下载并查看源码。
+StrangerChat SDK在GitHub上提供开源的实时视频通话示例项目[StrangerChatAndroid](https://github.com/linkvxiaohong/StrangerChatAndroid)。在实现相关功能前，你可以下载并查看源码。
 
 ![](https://github.com/linkv-io/StrangerChat/blob/master/Snapshot/StrangerChat.gif?raw=true)
 
