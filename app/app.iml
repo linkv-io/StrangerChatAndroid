@@ -131,9 +131,9 @@
     <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-livedata-core:2.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.arch.core:core-runtime:2.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.interpolator:interpolator:1.0.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.linkv.live:rtmsdk:0.0.6@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.linkv.live:rtmsdk:0.0.7@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.app.live:libimcore:1.0.8.2@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.linkv.live:rtcsdk:0.0.14@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.linkv.live:rtcsdk:0.0.16@aar" level="project" />
     <orderEntry type="module" module-name="strangerchat" />
   </component>
 </module>
