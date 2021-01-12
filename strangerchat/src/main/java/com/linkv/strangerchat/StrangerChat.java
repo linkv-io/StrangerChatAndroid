@@ -43,12 +43,12 @@ public class StrangerChat extends LVRTMEngine implements IMBridger.IMModuleEvent
     private String mRoomId;
 
     public static StrangerChat createEngine(Application application, String appId, String appKey, boolean isDebug, LinkVRTCEngine.IInitHandler iInitHandler, IMEventHandler imEventHandler) {
-        StrangerChat strangerChat = new StrangerChat(application, appId, appKey, appId, appKey, SDK_TYPE_LVRTC, isDebug, true, iInitHandler, imEventHandler);
+        StrangerChat strangerChat = new StrangerChat(application, appId, appKey, isDebug, true, iInitHandler, imEventHandler);
         return strangerChat;
     }
 
-    public StrangerChat(Application application, String rtcAppID, String rtcAppKey, String imAppID, String imAppKey, int sdkType, boolean isDebug, boolean isInternationalEnv, LinkVRTCEngine.IInitHandler iInitHandler, IMEventHandler imEventHandler) {
-        super(application, rtcAppID, rtcAppKey, imAppID, imAppKey, sdkType, isDebug, isInternationalEnv, iInitHandler);
+    public StrangerChat(Application application, String appId, String appKey, boolean isDebug, boolean isInternationalEnv, LinkVRTCEngine.IInitHandler iInitHandler, IMEventHandler imEventHandler) {
+        super(application, appId, appKey, isDebug, isInternationalEnv, iInitHandler);
         mIMEventHandler = imEventHandler;
 //        setRoomEventHandler(this);
         setGlobalReceiveMessageListener(this);
