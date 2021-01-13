@@ -12,4 +12,4 @@
 /captures
 .externalNativeBuild
 .cxx
-/app/src/main/java/com/linkv/strangechat/LocalConfig.java
+/app/src/main/java/com/linkv/strangechatdemo/LocalConfig.java
