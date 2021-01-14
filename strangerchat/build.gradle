@@ -25,7 +25,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    api 'com.linkv.live:rtmsdk:0.0.8'
+    api 'com.linkv.live:rtmsdk:0.0.9'
 
 }
 
