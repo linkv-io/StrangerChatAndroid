@@ -109,10 +109,10 @@
     <orderEntry type="library" name="Gradle: androidx.arch.core:core-common:2.1.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.annotation:annotation:1.1.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.constraintlayout:constraintlayout-solver:2.0.2@jar" level="project" />
-    <orderEntry type="library" name="Gradle: com.linkv.live:strangerchat:1.0.4@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.linkv.live:rtmsdk:0.0.8@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.linkv.live:strangerchat:1.0.5@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.linkv.live:rtmsdk:0.0.9@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.app.live:libimcore:1.0.8.2@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.linkv.live:rtcsdk:0.0.17@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.linkv.live:rtcsdk:0.0.18@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.constraintlayout:constraintlayout:2.0.2@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.github.pinguo-zhouwei:EasyBlur:v1.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.appcompat:appcompat:1.2.0@aar" level="project" />
