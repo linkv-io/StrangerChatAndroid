@@ -39,7 +39,7 @@ StrangerChat SDK在GitHub上提供开源的实时视频通话示例项目[Strang
 
 * 在项目中的android/app/build.gradle文件添加社交SDK依赖，请尽量使用api方式引入依赖，方便使用进阶功能接口：
 ```xml
-    api 'com.linkv.live:strangerchat:1.0.5'
+    api 'com.linkv.live:strangerchat:1.0.6'
 ```
 
   
