@@ -88,8 +88,8 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 29 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Gradle: com.linkv.live:rtmsdk:0.1.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.linkv.live:rtmsdk:0.1.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.app.live:libimcore:1.0.8.2@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.linkv.live:rtcsdk:0.0.20@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.linkv.live:rtcsdk:0.0.21@aar" level="project" />
   </component>
 </module>
