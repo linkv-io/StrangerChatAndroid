@@ -16,6 +16,8 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.im.imlogic.IMMsg;
+import com.linkv.rtc.LVConstants;
+import com.linkv.rtc.entity.LVAudioVolume;
 import com.linkv.rtcsdk.bean.VideoQuality;
 import com.linkv.strangechatdemo.common.BaseActivity;
 import com.linkv.strangechatdemo.R;
@@ -29,6 +31,8 @@ import com.linkv.strangechatdemo.widget.StaticGiftLayout;
 import com.linkv.strangerchat.StrangerChat;
 import com.zhouwei.blurlibrary.EasyBlur;
 
+import java.nio.ByteBuffer;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -353,6 +357,37 @@ public class LiveRoomActivity extends BaseActivity implements StrangerChat.Stran
     @Override
     public void onPlayStateUpdate(int i, String s) {
         LogUtils.d(TAG, "onPlayStateUpdate i = " + i + "  s = " + s);
+    }
+
+    @Override
+    public void onMixComplete(boolean success) {
+
+    }
+
+    @Override
+    public void onAudioMixStream(ByteBuffer audioBuffer, int sampleRate, int channels, int samplesPerChannel, int bitsPerSample, LVConstants.AudioRecordType type) {
+
+    }
+
+    @Override
+    public void onAudioVolumeUpdate(ArrayList<LVAudioVolume> volumes) {
+
+    }
+
+    @Override
+    public String onMediaSideInfoInPublishVideoFrame() {
+        return null;
+    }
+
+    @Override
+    public void onExitRoomComplete() {
+        LogUtils.d(TAG, " onExitRoomComplete");
+    }
+
+    @Override
+    public long onDrawFrame(ByteBuffer i420Buffer, int width, int height, int strideY, String userId, String ext) {
+        LogUtils.d(TAG, " onDrawFrame");
+        return 0;
     }
 
     @Override

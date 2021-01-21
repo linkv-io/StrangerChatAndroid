@@ -8,6 +8,8 @@ import com.im.imcore.IMBridger;
 import com.im.imlogic.IMMsg;
 import com.im.imlogic.LVIMSDK;
 import com.linkv.lvrtmsdk.LVRTMEngine;
+import com.linkv.rtc.LVConstants;
+import com.linkv.rtc.entity.LVAudioVolume;
 import com.linkv.rtcsdk.LinkVRTCEngine;
 import com.linkv.rtcsdk.bean.VideoQuality;
 import com.linkv.strangerchat.utils.JsonUtil;
@@ -15,6 +17,8 @@ import com.linkv.strangerchat.utils.JsonUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.nio.ByteBuffer;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -483,6 +487,55 @@ public class StrangerChat extends LVRTMEngine implements IMBridger.IMModuleEvent
     }
 
 
+    @Override
+    public void onMixComplete(boolean success) {
+        if (mStrangerRoomHandler != null) {
+            mStrangerRoomHandler.onMixComplete(success);
+        }
+    }
+
+    @Override
+    public void onAudioMixStream(ByteBuffer audioBuffer, int sampleRate, int channels, int samplesPerChannel,
+                                 int bitsPerSample, LVConstants.AudioRecordType type) {
+        if (mStrangerRoomHandler != null) {
+            mStrangerRoomHandler.onAudioMixStream(audioBuffer,sampleRate,channels,samplesPerChannel,bitsPerSample,type);
+        }
+    }
+
+    @Override
+    public void onAudioVolumeUpdate(ArrayList<LVAudioVolume> volumes) {
+        // 音量变化回调
+        if (mStrangerRoomHandler != null) {
+            mStrangerRoomHandler.onAudioVolumeUpdate(volumes);
+        }
+    }
+
+    @Override
+    public String onMediaSideInfoInPublishVideoFrame() {
+        if (mStrangerRoomHandler != null) {
+            return mStrangerRoomHandler.onMediaSideInfoInPublishVideoFrame();
+        }
+        return null;
+    }
+
+
+    @Override
+    public void onExitRoomComplete() {
+        if (mStrangerRoomHandler != null) {
+            mStrangerRoomHandler.onExitRoomComplete();
+        }
+    }
+
+    // 收到远端视频帧数据回调
+    @Override
+    public long onDrawFrame(ByteBuffer i420Buffer, final int width, final int height, int strideY, final String userId, final String ext) {
+        if (mStrangerRoomHandler != null) {
+            return mStrangerRoomHandler.onDrawFrame(i420Buffer,width,height,strideY,userId,ext);
+        }
+        return 0;
+    }
+
+
     public interface StrangerRoomHandler extends IRoomEventHandler {
         // 通话时长变化，每秒更新一次，单位(秒)
         void onCallTimeChanged(int duration, String roomId);
@@ -515,6 +568,25 @@ public class StrangerChat extends LVRTMEngine implements IMBridger.IMModuleEvent
         // 某个用户的摄像头状态发生了变化
         int onUserVideoCameraChanged(String uid, String roomId, boolean isOpen);
 
+
+        // 远端混流完成的回掉，用户可以通过调用混乱方法在远端进行音视频混流，参考 mixStream
+        void onMixComplete(boolean success);
+
+        // 混音录音数据回掉，该方法需要打开录音功能才会触发回掉 setAudioRecordFlag
+        public void onAudioMixStream(ByteBuffer audioBuffer, int sampleRate, int channels, int samplesPerChannel,
+                                     int bitsPerSample, LVConstants.AudioRecordType type);
+
+        // 音量变化回调
+        void onAudioVolumeUpdate(ArrayList<LVAudioVolume> volumes);
+
+        // 是否需要在视频帧上附加其他媒体信息
+        String onMediaSideInfoInPublishVideoFrame();
+
+        // 退出房间成功
+        void onExitRoomComplete();
+
+        // 收到远端视频数据回掉，如果为 SDK 设置了渲染视图，SDK 内部会自动将该视频帧渲染出来
+        long onDrawFrame(ByteBuffer i420Buffer, final int width, final int height, int strideY, final String userId, final String ext);
 
     }
 
