@@ -7,15 +7,26 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.im.imcore.IMBridger;
 import com.im.imlogic.IMMsg;
+import com.im.imlogic.LVIMSDK;
 import com.linkv.rtc.LVConstants;
 import com.linkv.rtc.entity.LVAudioVolume;
 import com.linkv.rtcsdk.bean.VideoQuality;
@@ -72,6 +83,11 @@ public class LiveRoomActivity extends BaseActivity implements StrangerChat.Stran
 
     // 当前视频时间（秒）。
     int mCurrentSeconds = 0;
+    private RecyclerView mRvMsgs;
+    private MsgAdapter mMsgAdapter;
+    private EditText mEtMsg;
+    private Button mBtnSend;
+    private View mContainerMsgEdit;
 
 
     @Override
@@ -109,6 +125,7 @@ public class LiveRoomActivity extends BaseActivity implements StrangerChat.Stran
         mIvEnableCamera = findViewById(R.id.iv_enable_camera);
         mBtnSwitchCamera = findViewById(R.id.btn_switch_camera);
         mViewGroupBottom = findViewById(R.id.view_group_bottom);
+        mContainerMsgEdit = findViewById(R.id.container_msg_edit);
         mViewGroupTop = findViewById(R.id.view_group_top);
         mContainerVideoLarge = findViewById(R.id.container_video_large);
         mContainerVideoSmall = findViewById(R.id.container_video_small);
@@ -117,6 +134,50 @@ public class LiveRoomActivity extends BaseActivity implements StrangerChat.Stran
         mContainerGift = findViewById(R.id.container_gift);
         mIvBlurLarge = findViewById(R.id.iv_blur_large);
         mIvBlurSmall = findViewById(R.id.iv_blur_small);
+        mRvMsgs = findViewById(R.id.rv_msgs);
+        mEtMsg = findViewById(R.id.et_msg);
+        mBtnSend = findViewById(R.id.btn_send);
+        mBtnSend.setOnClickListener(v -> {
+            // 发送消息。
+            String content = mEtMsg.getText().toString().trim();
+            if (TextUtils.isEmpty(content)) return;
+            IMMsg msg = IMMsg.buildChatRoomMessage(mRoomId, "msgType", content);
+            LVIMSDK.sharedInstance().sendMessage(msg, null, new IMBridger.IMSendMessageListener() {
+                @Override
+                public void onIMSendMessageCallback(int i, String s, IMMsg imMsg, Object o) {
+                    // 发送消息结果码
+                    LogUtils.d(TAG, "send room msg result code  = " + i);
+                    mMsgList.add(imMsg);
+                    refreshData();
+                    mEtMsg.setText("");
+                }
+            });
+
+        });
+        mEtMsg.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s != null && s.toString().trim().length() > 0) {
+                    mBtnSend.setVisibility(View.VISIBLE);
+                } else {
+                    mBtnSend.setVisibility(View.GONE);
+                }
+            }
+        });
+        mRvMsgs.setLayoutManager(new LinearLayoutManager(this));
+//        mRvMsgs.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        mMsgAdapter = new MsgAdapter(this);
+        mRvMsgs.setAdapter(mMsgAdapter);
         mBtnClose.setOnClickListener(this);
         mBtnEnableCamera.setOnClickListener(this);
         mBtnGift.setOnClickListener(this);
@@ -159,9 +220,10 @@ public class LiveRoomActivity extends BaseActivity implements StrangerChat.Stran
 
     /**
      * 初始化礼物项
-     * @param giftView 礼物信息显示控件
-     * @param previewId  礼物预览图
-     * @param price 礼物价格
+     *
+     * @param giftView  礼物信息显示控件
+     * @param previewId 礼物预览图
+     * @param price     礼物价格
      */
     private void initGiftItem(View giftView, int previewId, int price) {
         ImageView ivPreview = giftView.findViewById(R.id.iv_preview);
@@ -173,9 +235,10 @@ public class LiveRoomActivity extends BaseActivity implements StrangerChat.Stran
 
     /**
      * 开启本Activity
+     *
      * @param context 上下文
-     * @param tid 对方用户ID
-     * @param roomId 聊天室ID
+     * @param tid     对方用户ID
+     * @param roomId  聊天室ID
      */
     public static void actionStart(Context context, String tid, String roomId) {
         Intent intent = new Intent(context, LiveRoomActivity.class);
@@ -263,7 +326,8 @@ public class LiveRoomActivity extends BaseActivity implements StrangerChat.Stran
 
     /**
      * 显示高斯模糊的头像
-     * @param uid 对应头像的用户ID
+     *
+     * @param uid      对应头像的用户ID
      * @param blurView 待显示高斯模糊头像控件。
      */
     private void showBlurView(int uid, ImageView blurView) {
@@ -277,6 +341,7 @@ public class LiveRoomActivity extends BaseActivity implements StrangerChat.Stran
 
     /**
      * 将bitmap进行
+     *
      * @param srcBitmap
      * @return
      */
@@ -344,9 +409,12 @@ public class LiveRoomActivity extends BaseActivity implements StrangerChat.Stran
 
     }
 
+    List<IMMsg> mMsgList = new ArrayList<>();
+
     @Override
     public void onRoomMessageReceive(IMMsg imMsg) {
-
+        mMsgList.add(imMsg);
+        refreshData();
     }
 
     @Override
@@ -470,6 +538,8 @@ public class LiveRoomActivity extends BaseActivity implements StrangerChat.Stran
         mIsBtnsShow = !mIsBtnsShow;
         mViewGroupTop.setVisibility(mIsBtnsShow ? View.VISIBLE : View.GONE);
         mViewGroupBottom.setVisibility(mIsBtnsShow ? View.VISIBLE : View.GONE);
+        mContainerMsgEdit.setVisibility(mIsBtnsShow ? View.VISIBLE : View.GONE);
+        mRvMsgs.setVisibility(mIsBtnsShow ? View.VISIBLE : View.GONE);
         mLayoutGift.setVisibility(View.GONE);
     }
 
@@ -502,4 +572,62 @@ public class LiveRoomActivity extends BaseActivity implements StrangerChat.Stran
             super.onBackPressed();
         }
     }
+
+
+    public void refreshData() {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                mMsgAdapter.notifyDataSetChanged();
+                mRvMsgs.scrollToPosition(mMsgAdapter.getItemCount() - 1);
+            }
+        });
+    }
+
+
+    class MsgAdapter extends RecyclerView.Adapter<MsgHolder> {
+        public Context mContext;
+
+        public MsgAdapter(Context context) {
+            this.mContext = context;
+        }
+
+
+        @Override
+        public MsgHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View itemView = LayoutInflater.from(mContext).inflate(R.layout.item_msg, null);
+
+            return new MsgHolder(itemView);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull MsgHolder holder, int position) {
+            IMMsg msg = mMsgList.get(position);
+            holder.tvName.setText(User.getNameById(msg.fromID));
+            holder.tvMsg.setText(msg.getMsgContent());
+        }
+
+        @Override
+        public int getItemCount() {
+            return mMsgList.size();
+        }
+
+    }
+
+
+    class MsgHolder extends RecyclerView.ViewHolder {
+        public TextView tvName;
+        public TextView tvMsg;
+
+        public MsgHolder(@NonNull View itemView) {
+            super(itemView);
+            tvMsg = itemView.findViewById(R.id.tv_msg);
+            tvName = itemView.findViewById(R.id.tv_name);
+
+
+        }
+
+
+    }
+
 }

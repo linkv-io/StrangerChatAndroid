@@ -41,6 +41,12 @@ public class User {
     }
 
 
+    public static String getNameById(String id) {
+        // 根据uid生成name
+        return nameArray[Integer.parseInt(id) % 10];
+    }
+
+
     public int getAvatarId() {
         // 根据uid生成avatarId
         avatarId = avatarArray[uid % 10];

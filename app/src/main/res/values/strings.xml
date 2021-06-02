@@ -4,4 +4,6 @@
     <string name="incoming_call">申请和你通话</string>
     <string name="id">ID: %d</string>
     <string name="gift_num">X%d</string>
+    <string name="say_something">说点什么吧...</string>
+    <string name="send">send</string>
 </resources>

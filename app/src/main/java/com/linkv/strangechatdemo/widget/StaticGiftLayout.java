@@ -109,7 +109,7 @@ public class StaticGiftLayout extends LinearLayout {
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
-                setVisibility(View.GONE);
+                setVisibility(View.INVISIBLE);
             }
         });
     }

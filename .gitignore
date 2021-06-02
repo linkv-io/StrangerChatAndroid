@@ -9,7 +9,8 @@
 /.idea/assetWizardSettings.xml
 .DS_Store
 /build
-/captures
+/captureszen
 .externalNativeBuild
 .cxx
 /app/src/main/java/com/linkv/strangechatdemo/LocalConfig.java
+/.idea/jarRepositories.xml
